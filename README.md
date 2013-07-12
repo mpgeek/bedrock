@@ -1,4 +1,4 @@
 bedrock
 =======
 
-Super awesome extensible theme for D7.
+Awesomerest thing to behold.
