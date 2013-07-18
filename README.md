@@ -1,5 +1,3 @@
 Bedrock
 =======
-
-This is a sandbox for evaluating frontend frameworks to build a D7 base theme
-upon. Right now Foundation 4 is being evaluated.
+A superawesome developer-centric base theme and subtheme starter kit for Drupal 7. The frontend framework is foundation 4, and the Drupal heavy lifting is AdaptiveTheme, and you will like it or your face will be eaten.
