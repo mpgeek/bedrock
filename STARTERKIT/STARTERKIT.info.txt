@@ -1,5 +1,5 @@
-name        = Bedrock Subtheme
-description = ADD YOUR DESCRIPTION
+name        = Bedrock STARTERKIT
+description = Starter subtheme for Bedrock. Copy this subtheme to get started building your own Drupal theme.
 core        = 7.x
 base theme  = bedrock
 
