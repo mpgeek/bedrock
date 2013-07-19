@@ -1,5 +1,5 @@
 name        = Bedrock
-description = DESCRIPTION HERE
+description = A base-child theme framework for developers.
 core        = 7.x
 
 ;; -- Theme Regions --
