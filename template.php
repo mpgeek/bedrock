@@ -1695,23 +1695,6 @@ function bedrock_preprocess_maintenance_page(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
 
-  // Get the path to the directory where our CSS files are saved
-  $path = variable_get('theme_' . $theme_name . '_files_directory');
-
-  // Load Layout
-  load_layout_css($path, $theme_name);
-
-  // Load Responsive Styles.
-  if (!bedrock_get_setting('disable_responsive_styles', $theme_name)) {
-    load_responsive_css($path, $theme_name);
-  }
-
-  // Load fonts and/or Custom CSS
-  if (bedrock_get_setting('enable_extensions', $theme_name)) {
-    // Load Extension Settings CSS
-    load_extensions_css($theme_name);
-  }
-
   // Build an array of polyfilling scripts
   $vars['polyfills_array'] = '';
   $vars['polyfills_array'] = bedrock_load_polyfills($theme_name, $vars);
@@ -1815,10 +1798,6 @@ function bedrock_process_page(&$vars) {
   // Generate the wrapper element for the main content
   $vars['tag'] = $vars['title'] ? 'section' : 'div';
 
-  // Force full width wrapper template suggestion if enabled
-  if (bedrock_get_setting('page_full_width_wrappers', $theme_name)) {
-    array_unshift($vars['theme_hook_suggestions'], 'page__full_width_wrappers');
-  }
   // Remove the frontpage title if set in theme settings
   if (bedrock_get_setting('frontpage_remove_title') && $vars['is_front']) {
     $vars['title'] = '';
