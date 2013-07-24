@@ -5,7 +5,7 @@
  */
 
 /**
- * hook_html_head_alter()
+ * Implements hook_html_head_alter().
  */
 function bedrock_html_head_alter(&$head_elements) {
   global $theme_key;
@@ -156,7 +156,7 @@ function bedrock_html_head_alter(&$head_elements) {
 }
 
 /**
- * hook_js_alter()
+ * Implements hook_js_alter().
  */
 function bedrock_js_alter(&$javascript) {
   // Use our own vesion of vertical-tabs.js for better error handling
@@ -168,7 +168,7 @@ function bedrock_js_alter(&$javascript) {
 }
 
 /**
- * hook_page_alter()
+ * Implements hook_page_alter().
  */
 function bedrock_page_alter(&$page) {
   global $theme_key;
@@ -188,7 +188,7 @@ function bedrock_page_alter(&$page) {
 }
 
 /**
- * hook_form_FORM_alter()
+ * Implements hook_form_FORM_alter().
  */
 function bedrock_form_alter(&$form, &$form_state, $form_id) {
   // Collapse Noggin fieldset by default
@@ -201,8 +201,9 @@ function bedrock_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * hook_form_FORM_ID_alter()
- * Modify the Advanced Search Form
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Modifies the advanced search form.
  */
 function bedrock_form_search_form_alter(&$form, $form_state) {
   // The problem with Drupals standard Advanced search form is that each
@@ -289,7 +290,7 @@ function bedrock_form_search_form_alter(&$form, $form_state) {
 }
 
 /**
- * hook_form_FORM_ID_alter()
+ * Implements hook_form_FORM_ID_alter().
  * Modify the User Login Block Form
  */
 function bedrock_form_user_login_block_alter(&$form, &$form_state, $form_id) {
@@ -322,7 +323,7 @@ function bedrock_form_user_login_block_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * hook_form_BASE_FORM_ID_alter()
+ * Implements hook_form_BASE_FORM_ID_alter().
  *
  * Modify field classes on node forms.
  */
@@ -362,7 +363,7 @@ function bedrock_wysiwyg_editor_settings_alter(&$settings, &$context) {
  * Return an array of classes to be used for body classes in html.tpl.php
  *
  * @param array $vars
- *   Passed in the bedrock_preprocess_html()
+ *   Passed in the bedrock_preprocess_html().
  * @param string $theme_name
  *   The active theme.
  */
@@ -433,9 +434,6 @@ function bedrock_generate_html_classes(&$vars, $theme_name) {
  * Retrieve a setting for the current theme or for a given theme.
  *
  * Bedrock's stripped down optimized version of theme_get_setting().
- * Why? Because it wayfasterbetter, emphasis on the faster which is really the
- * only valid reason to do something as stupid as this, and it is faster,
- * considerably faster. Doing this wiped 100ms off page generation time.
  *
  * @param $setting_name
  * @param null $theme
@@ -872,10 +870,11 @@ function bedrock_theme_conditional_script($filepath) {
 
 /**
  * Return themed scripts in Conditional Comments.
+ *
  * Since Drupal 7 does not (yet) support the 'browser' option in drupal_add_js()
  * bedrock provides a way to load scripts inside conditional comments.
- * This function will return a string for printing into a template, its
- * akin to a real theme_function but its not.
+ * This function will return a string for printing into a template; it's
+ * akin to a real theme function but its not.
  *
  * @param $ie_scripts, an array of themed scripts.
  */
@@ -895,6 +894,7 @@ function bedrock_theme_conditional_scripts($ie_scripts) {
 
 /**
  * Polyfills.
+ *
  * This function does two seperate operations. First it attaches a condition
  * to each Polyfill which can be either an IE conditional comment or 'all'.
  * Polyfills with 'all' are loaded immediatly via drupal_add_js(), those with
@@ -1659,7 +1659,7 @@ function bedrock_preprocess_username(&$vars) {
 }
 
 /**
- * Preprocess variables for theme_image()
+ * Preprocess variables for theme_image().
  */
 function bedrock_preprocess_image(&$vars) {
   // Initialize the variable if there isn't one
@@ -1794,6 +1794,7 @@ function bedrock_process_page(&$vars) {
   $theme_name = $theme_key;
 
   // Attributes
+  // @todo: Make this a loop to avoid so much repetition.
   $vars['page_attributes'] = empty($vars['page_attributes_array']) ? '' : drupal_attributes($vars['page_attributes_array']);
   $vars['header_attributes'] = empty($vars['header_attributes_array']) ? '' : drupal_attributes($vars['header_attributes_array']);
   $vars['branding_attributes'] = empty($vars['branding_attributes_array']) ? '' : drupal_attributes($vars['branding_attributes_array']);
@@ -1951,7 +1952,7 @@ function bedrock_process_comment(&$vars) {
 }
 
 /**
- * Process variables for adaptivtheme_menubar()
+ * Process variables for bedrock_menubar().
  */
 function bedrock_process_menubar(&$vars) {
   // The default theme implementation is a function, so template_process() does
@@ -1998,7 +1999,7 @@ function bedrock_process_maintenance_page(&$vars) {
  */
 
 /**
- * Implements hook_theme()
+ * Implements hook_theme().
  *
  * @param $existing
  * @param $type
