@@ -641,7 +641,7 @@ function bedrock_get_css_files($theme_name) {
  * @param string $theme_name
  *   The theme of interest; usually the active theme.
  */
-function load_polyfills($theme_name) {
+function bedrock_load_polyfills($theme_name) {
   global $path_to_bedrock;
 
   // Get the info file data
@@ -665,13 +665,13 @@ function load_polyfills($theme_name) {
     $polly_settings_array = array(
       'load_respondjs',
       'load_html5js',
-      'load_scalefixjs', // loaded directly by polly_wants_a_cracker(), its never returned
-      'load_onmediaqueryjs', // loaded directly by polly_wants_a_cracker(), its never returned
+      'load_scalefixjs', // loaded directly by bedrock_polly_wants_a_cracker(), its never returned
+      'load_onmediaqueryjs', // loaded directly by bedrock_polly_wants_a_cracker(), its never returned
     );
     foreach ($polly_settings_array as $polly_setting) {
       $polly[$polly_setting] = bedrock_get_setting($polly_setting, $theme_name);
     }
-    $backed_crackers = polly_wants_a_cracker($polly, $theme_name);
+    $backed_crackers = bedrock_polly_wants_a_cracker($polly, $theme_name);
     foreach ($backed_crackers as $cupboard => $flavors) {
       foreach ($flavors as $key => $value) {
         $filepath = $path_to_bedrock . '/' . $value;
@@ -690,7 +690,7 @@ function load_polyfills($theme_name) {
  * @param string $theme_name
  *   The theme of interest; usually the active theme.
  */
-function load_debuggers($theme_name) {
+function bedrock_load_debuggers($theme_name) {
   global $path_to_bedrock;
 
   // Do some debugging/development stuff
@@ -741,7 +741,7 @@ function load_debuggers($theme_name) {
  * @param number $weight
  *   Optional.
  */
-function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0) {
+function bedrock_load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $weight = 0) {
   if (file_exists($filepath)) {
     drupal_add_css($filepath, array(
       'preprocess' => variable_get('preprocess_css', '') == 1 ? TRUE : FALSE,
@@ -762,7 +762,7 @@ function load_subtheme_responsive_styles($filepath, $media_query, $theme_name, $
  * @param string $theme_name
  *   The theme of interest; usually the active theme.
  */
-function load_subtheme_conditional_styles($theme_name) {
+function bedrock_load_subtheme_conditional_styles($theme_name) {
   $info = drupal_static(__FUNCTION__, array());
   if (empty($info)) {
     // Get the info file data
@@ -783,7 +783,7 @@ function load_subtheme_conditional_styles($theme_name) {
             $ie_style['condition'] = $condition;
             $ie_style['path'] = $ie_styles_path;
             $filepath = drupal_get_path('theme', $theme_name) . '/' . $ie_style['path'];
-            load_conditional_styles($filepath, $ie_style, $theme_name);
+            bedrock_load_conditional_styles($filepath, $ie_style, $theme_name);
           }
         }
       }
@@ -817,7 +817,7 @@ function load_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0)
     );
   }
   else {
-    load_failure($filepath, $theme_name);
+    bedrock_load_failure($filepath, $theme_name);
   }
 }
 
@@ -832,7 +832,7 @@ function load_conditional_styles($filepath, $ie_style, $theme_name, $weight = 0)
  * @param $scope, header or footer.
  * @param $weight, optional.
  */
-function load_subtheme_script($filepath, $theme_name, $scope, $weight = NULL) {
+function bedrock_load_subtheme_script($filepath, $theme_name, $scope, $weight = NULL) {
   $filepath = drupal_get_path('theme', $theme_name) . '/' . $filepath;
   if (file_exists($filepath)) {
     drupal_add_js($filepath, array(
@@ -905,7 +905,7 @@ function bedrock_theme_conditional_scripts($ie_scripts) {
  * @param $polly
  * @param $theme_name
  */
-function polly_wants_a_cracker($polly, $theme_name) {
+function bedrock_polly_wants_a_cracker($polly, $theme_name) {
   global $path_to_bedrock;
 
   $baked_crackers = drupal_static(__FUNCTION__, array());
@@ -991,22 +991,19 @@ function bedrock_preprocess_html(&$vars) {
     $vars['rdf_namespaces_array']['prefix'] = implode(' ', $prefixes);
   }
 
-  // Get the path to the directory where our CSS files are saved
-  $path = variable_get('theme_' . $theme_name . '_files_directory');
-
   // Load conditional stylesheets declared in the info file
   if (isset($info['ie_stylesheets'])) {
-    load_subtheme_conditional_styles($theme_name);
+    bedrock_load_subtheme_conditional_styles($theme_name);
   }
 
   // Load specific subtheme scripts
   if (bedrock_get_setting('load_onmediaqueryjs', $theme_name)) {
-    load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
+    bedrock_load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
   }
 
   // Build an array of polyfilling scripts
   $vars['polyfills_array'] = '';
-  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
+  $vars['polyfills_array'] = bedrock_load_polyfills($theme_name, $vars);
 
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
@@ -1024,7 +1021,7 @@ function bedrock_preprocess_html(&$vars) {
 
   // Load debuggers if enabled.
   if (bedrock_get_setting('expose_regions', $theme_name) || bedrock_get_setting('show_window_size', $theme_name)) {
-    load_debuggers($theme_name);
+    bedrock_load_debuggers($theme_name);
   }
 }
 
@@ -1717,7 +1714,7 @@ function bedrock_preprocess_maintenance_page(&$vars) {
 
   // Build an array of polyfilling scripts
   $vars['polyfills_array'] = '';
-  $vars['polyfills_array'] = load_polyfills($theme_name, $vars);
+  $vars['polyfills_array'] = bedrock_load_polyfills($theme_name, $vars);
 
   // Load the colors stylesheet for the active color scheme. This only works
   // for maintenance mode, when there is a database error the default color
