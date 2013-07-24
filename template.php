@@ -2088,9 +2088,6 @@ function bedrock_breadcrumb($vars) {
       return $output;
     }
   }
-  else {
-    return;
-  }
 }
 
 /**
