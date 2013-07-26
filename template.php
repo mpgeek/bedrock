@@ -575,6 +575,8 @@ function bedrock_preprocess_html(&$vars) {
       $vars['classes_array'][] = $class_name;
     }
   }
+
+  $vars['polyfills'] = bedrock_load_polyfills($theme_name);
 }
 
 /**
@@ -1246,6 +1248,8 @@ function bedrock_preprocess_image(&$vars) {
 function bedrock_preprocess_maintenance_page(&$vars) {
   global $theme_key;
   $theme_name = $theme_key;
+
+  $vars['polyfills'] = bedrock_load_polyfills($theme_name);
 
   // Load the colors stylesheet for the active color scheme. This only works
   // for maintenance mode, when there is a database error the default color
@@ -2073,4 +2077,126 @@ function bedrock_field__image($vars) {
   $output = "<$tag class=\"" . $vars['classes'] . '"' . $vars['attributes'] . '>' . $output . "</$tag>";
 
   return $output;
+}
+
+/**
+ * Load polyfill scripts.
+ *
+ * Conditional scripts are returned to the preprocess function - in Bedrock that
+ * means bedrock_preprocess_html() and bedrock_preprocess_maintenance_page().
+ * There are two sources for conditional scripts - the subtheme info file and
+ * Bedrock itself specifies load html5.js and respond.js.
+ *
+ * Unconditional scripts (those not printed within an IE conditional comment)
+ * load directly via drupal_add_js in this function, while the conditional
+ * scripts are returned as an array to preprocess, then rendered in process.
+ * This is done to allow themers to manipulate the data structure in preprocess
+ * if they have the need.
+ *
+ * @param string $theme_name
+ *   Name of the Bedrock sub-theme.
+ *
+ * @return
+ *   Render array of conditional-comment scripts to be rendered in <head>.
+ */
+function bedrock_load_polyfills($theme_name) {
+  $bedrock_path = drupal_get_path('theme', 'bedrock');
+
+  // Get the info file data
+  $info = bedrock_get_info($theme_name);
+
+  // Build an array of polyfilling scripts
+  $polyfills = drupal_static('bedrock_preprocess_html_polyfills_array');
+  if (empty($polyfills)) {
+
+    $theme_path = drupal_get_path('theme', $theme_name);
+    $polyfills_array = array();
+
+    // Info file loaded conditional scripts
+    if (array_key_exists('ie_scripts', $info)) {
+      foreach ($info['ie_scripts'] as $condition => $ie_scripts_path) {
+        foreach ($ie_scripts_path as $key => $value) {
+          $filepath = $theme_path . '/' . $value;
+          $polyfills_array['ie'][$condition][] = bedrock_theme_script($filepath);
+        }
+      }
+    }
+
+    // Conditional scripts.
+    if (bedrock_get_setting('load_html5js')) {
+      $polyfills_array['ie']['lt IE 9'][] = bedrock_theme_script($bedrock . '/scripts/vendor/html5.js');
+    }
+    if (bedrock_get_setting('load_respondjs')) {
+      $polyfills_array['ie']['lt IE 9'][] = bedrock_theme_script($bedrock . '/scripts/vendor/respond.js');
+    }
+
+    // Unconditional scripts.
+    if (bedrock_get_setting('load_scalefixjs')) {
+      $polyfills_array['all'][] = 'scripts/vendor/scalefix.js';
+    }
+    if (bedrock_get_setting('load_onmediaqueryjs')) {
+      $polyfills_array['all'][] = 'scripts/vendor/onmediaquery.js';
+    }
+    if (bedrock_get_setting('load_matchmediajs')) {
+      $polyfills_array['all'][] = 'scripts/vendor/matchMedia.js';
+      $polyfills_array['all'][] = 'scripts/vendor/matchMedia.addListener.js';
+    }
+
+    // Load polyfills.
+    if (!empty($polyfills_array)) {
+      // "all" - no conditional comment needed, use drupal_add_js()
+      if (isset($polyfills_array['all'])) {
+        foreach ($polyfills_array['all'] as $script) {
+          drupal_add_js($bedrock_path . '/' . $script, array(
+            'type' => 'file',
+            'scope' => 'header',
+            'group' => JS_THEME,
+            'preprocess' => TRUE,
+            'cache' => TRUE,
+            )
+          );
+        }
+      }
+
+      // Build render array for IE conditional scripts.
+      if (isset($polyfills_array['ie'])) {
+        $polyfills = array();
+        foreach ($polyfills_array['ie'] as $conditional_comment => $scripts) {
+          $ie_script = array(
+            '#type' => 'markup',
+            '#markup' => implode("\n", $scripts),
+            '#prefix' => "<!--[if " . $conditional_comment . "]>\n",
+            '#suffix' => "\n<![endif]-->\n",
+          );
+          $polyfills[$conditional_comment] = $ie_script;
+        }
+      }
+    }
+    else {
+      $polyfills = '';
+    }
+  }
+
+  return $polyfills;
+}
+
+/**
+ * Returns a script tag.
+ *
+ * Wraps a file in script element and returns a string.
+ *
+ * @param string $filepath
+ *   Path to the file.
+ */
+function bedrock_theme_script($filepath) {
+  $script = '';
+
+  if (file_exists($filepath)) {
+    // Use the default query string for cache control fingerprinting.
+    $query_string = variable_get('css_js_query_string', '0');
+
+    $file = file_create_url($filepath);
+    $script = '<script src="' . $file . '?' . $query_string . '"></script>';
+  }
+  return $script;
 }
