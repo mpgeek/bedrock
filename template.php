@@ -532,8 +532,8 @@ function bedrock_get_info_trail($theme_name) {
 }
 
 /**
- * All Preprocess functions for templates and theme fucntions.
- * If you need to add or modify preprocess functions do it in your sub-theme.
+ * All preprocess functions for templates.
+ * If you need to add or modify preprocess functions, do it in your sub-theme.
  */
 
 /**
@@ -695,8 +695,8 @@ function bedrock_preprocess_page(&$vars) {
   $vars['footer_attributes_array']['class'][] = 'clearfix';
   $vars['footer_attributes_array']['role'][] = 'contentinfo';
 
-  // Work around a perculier bug/feature(?) in Drupal 7 which incorrectly sets
-  // the page title to "User account" for all three of these pages.
+  // Work around a peculiar bug in Drupal 7 which incorrectly sets the page
+  // title to "User account" for all three of these pages.
   if (arg(0) === 'user') {
     if (arg(1) === 'login' || arg(1) == '') {
       drupal_set_title(t('User login'));
@@ -714,9 +714,6 @@ function bedrock_preprocess_page(&$vars) {
  * Preprocess variables for region.tpl.php
  */
 function bedrock_preprocess_region(&$vars) {
-  global $theme_key;
-
-  $region = $vars['region'];
 }
 
 /**
