@@ -5,11 +5,6 @@
  *
  * Not all variables are mirrored from html.tpl.php and page.tpl.php, only those
  * required to deliver a valid html page with branding and site offline messages.
- * $polyfills is included to support HTML5 in IE8 and below.
- *
- * Bedrock variables:
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
  *
  * @see template_preprocess()
  * @see template_preprocess_maintenance_page()
@@ -24,7 +19,6 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
-  <?php print $polyfills; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php print $page_top; ?>

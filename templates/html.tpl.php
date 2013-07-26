@@ -7,12 +7,8 @@
  * Bedrock Variables:
  * - $html_attributes: structure attributes, includes the lang and dir attributes
  *   by default, use $vars['html_attributes_array'] to add attributes in preprcess
- * - $polyfills: prints IE conditional polyfill scripts enabled via theme
- *   settings.
  * - $skip_link_target: prints an ID for the skip navigation target, set in
  *   theme settings.
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
  *
  * Available Variables:
  * - $css: An array of CSS files for the current page.
@@ -62,7 +58,6 @@
 <title><?php print $head_title; ?></title>
 <?php print $styles; ?>
 <?php print $scripts; ?>
-<?php print $polyfills; ?>
 </head>
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div id="skip-link">

@@ -7,7 +7,7 @@
  * Instead of hard coding its markup bedrock generates it in
  * bedrock_process_region(), conditionally printing outer and inner wrappers.
  *
- * This allows the core theme to have just one region template instead of four.
+ * This allows the theme to have just one region template instead of four.
  *
  * You can override this in your sub-theme with a normal region suggestion and use
  * a standard region template if you prefer, or use your own themeName_process_region()
@@ -37,10 +37,6 @@
  *   $vars['outer_suffix'] = '</div>';
  * }
  * @endcode
- *
- * Sidebar Region Template:
- * - You can use a singlular region--sidebar.tpl.php template
- *   file to theme both sidebars.
  *
  * Bedrock variables:
  * - $outer_prefix: Outer div with region classes.

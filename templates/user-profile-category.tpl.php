@@ -14,10 +14,6 @@
  * @see user-profile.tpl.php
  *      where all items and categories are collected and printed out.
  *
- * Bedrock variables:
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
- *
  * Available variables:
  * - $title: Category title for the group of items.
  * - $profile_items: All the items for the group rendered through

@@ -3,8 +3,7 @@
  * @file
  * Bedrock implementation for the display of a single comment.
  *
- * Bedrock variables:
- * AT Core sets special time and date variables for use in templates:
+ * Bedrock sets special time and date variables for use in templates:
  * - $submitted: Submission information created from $name and $date during
  *   bedrock_preprocess_comment(), uses the $created variable.
  * - $created: Formatted date and time for when the comment was created wrapped
@@ -13,8 +12,6 @@
  * - $header_attributes: attributes such as classes to apply to the header element.
  * - $footer_attributes: attributes such as classes to apply to the footer element.
  * - $links_attributes: attributes such as classes to apply to the nav element.
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
  *
  * Available variables:
  * - $author: Comment author. Can be link or plain text.

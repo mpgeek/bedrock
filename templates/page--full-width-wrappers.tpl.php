@@ -26,8 +26,6 @@
  * - $primary_local_tasks: Split local tasks - primary.
  * - $secondary_local_tasks: Split local tasks - secondary.
  * - $tag: Prints the wrapper element for the main content.
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
  * - *_attributes: attributes for various site elements, usually holds id, class
  *   or role attributes.
  *

@@ -3,10 +3,6 @@
  * @file
  * Bedrock implementation to provide an HTML container for comments.
  *
- * Bedrock variables:
- * - $is_mobile: Bool, requires the Browscap module to return TRUE for mobile
- *   devices. Use to test for a mobile context.
- *
  * Available variables:
  * - $content: The array of content-related elements for the node. Use
  *   render($content) to print them all, or
