@@ -562,16 +562,6 @@ function bedrock_preprocess_html(&$vars) {
     $vars['rdf_namespaces_array']['prefix'] = implode(' ', $prefixes);
   }
 
-  // Load conditional stylesheets declared in the info file
-  if (isset($info['ie_stylesheets'])) {
-    bedrock_load_subtheme_conditional_styles($theme_name);
-  }
-
-  // Load specific subtheme scripts
-  if (bedrock_get_setting('load_onmediaqueryjs', $theme_name)) {
-    bedrock_load_subtheme_script('scripts/media_queries.js', $theme_name, 'footer', '100');
-  }
-
   // Set the skip link target id
   $vars['skip_link_target'] = '#main-content';
   if (bedrock_get_setting('skip_link_target', $theme_name)) {
@@ -584,11 +574,6 @@ function bedrock_preprocess_html(&$vars) {
     foreach ($html_classes as $class_name) {
       $vars['classes_array'][] = $class_name;
     }
-  }
-
-  // Load debuggers if enabled.
-  if (bedrock_get_setting('expose_regions', $theme_name) || bedrock_get_setting('show_window_size', $theme_name)) {
-    bedrock_load_debuggers($theme_name);
   }
 }
 
