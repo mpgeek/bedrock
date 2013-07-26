@@ -1569,7 +1569,7 @@ function bedrock_breadcrumb($vars) {
       $separator = filter_xss_admin(bedrock_get_setting('breadcrumb_separator', $theme_name));
 
       // Push the page title onto the end of the breadcrumb array
-      if (bedrock_get_setting('breadcrumb_title', $theme_name) == 1) {
+      if (bedrock_get_setting('breadcrumb_title', $theme_name)) {
         $breadcrumb[] = '<span class="crumb-title">' . drupal_get_title() . '</span>';
       }
 
@@ -1578,7 +1578,7 @@ function bedrock_breadcrumb($vars) {
       $last = key($breadcrumb);
 
       $output = '';
-      if (bedrock_get_setting('breadcrumb_label', $theme_name) == 1) {
+      if (bedrock_get_setting('breadcrumb_label', $theme_name)) {
         $output = '<div id="breadcrumb" class="clearfix"><nav class="breadcrumb-wrapper with-breadcrumb-label clearfix" role="navigation">';
         $output .= '<h2 class="breadcrumb-label">' . t('You are here') . '</h2>';
       }
@@ -1768,7 +1768,7 @@ function bedrock_menu_link(array $vars) {
     $sub_menu = drupal_render($element['#below']);
   }
 
-  if (bedrock_get_setting('extra_menu_classes', $theme_name) == 1 && !empty($element['#original_link'])) {
+  if (bedrock_get_setting('extra_menu_classes', $theme_name) && !empty($element['#original_link'])) {
     if (!empty($element['#original_link']['depth'])) {
       $element['#attributes']['class'][] = 'menu-depth-' . $element['#original_link']['depth'];
     }
@@ -1777,12 +1777,12 @@ function bedrock_menu_link(array $vars) {
     }
   }
 
-  if (bedrock_get_setting('menu_item_span_elements', $theme_name) == 1 && !empty($element['#title'])) {
+  if (bedrock_get_setting('menu_item_span_elements', $theme_name) && !empty($element['#title'])) {
     $element['#title'] = '<span>' . $element['#title'] . '</span>';
     $element['#localized_options']['html'] = TRUE;
   }
 
-  if (bedrock_get_setting('unset_menu_titles', $theme_name) == 1 && !empty($element['#localized_options']['attributes']['title'])) {
+  if (bedrock_get_setting('unset_menu_titles', $theme_name) && !empty($element['#localized_options']['attributes']['title'])) {
     unset($element['#localized_options']['attributes']['title']);
   }
 
