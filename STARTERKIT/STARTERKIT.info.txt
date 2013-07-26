@@ -20,3 +20,52 @@ stylesheets[all][] = css/global.css
 
 ;; -- Javascript --
 scripts[] = js/global.js
+
+;; -- Settings --
+
+settings[apple_touch_icon_path_h] = ''
+settings[apple_touch_icon_path_l] = ''
+settings[apple_touch_icon_path_m] = ''
+settings[bedrock_meta_apple_mobile_web_app_capable] = 1
+settings[bedrock_meta_handheldfriendly] = 1
+settings[bedrock_meta_mobileoptimized] = 1
+settings[bedrock_meta_viewport] = 1
+settings[breadcrumb_display] = 1
+settings[breadcrumb_home] = 1
+settings[breadcrumb_label] = 1
+settings[breadcrumb_separator] = ' &raquo; '
+settings[breadcrumb_title] = 1
+settings[chrome_edge] = 1
+settings[clear_type] = 1
+settings[comments_hide_title] = 0
+settings[enable_apple_touch_icons] = 1
+settings[enable_extensions] = 1
+settings[enable_image_settings] = 1
+settings[enable_markup_overrides] = 1
+settings[expose_regions] = 0
+settings[extra_article_classes] = ''
+settings[extra_block_classes] = ''
+settings[extra_comment_classes] = ''
+settings[extra_item_list_classes] = ''
+settings[extra_menu_classes] = ''
+settings[extra_page_classes] = ''
+settings[feed_icons_hide] = 1
+settings[frontpage_remove_title] = 1
+settings[horizontal_login_block] = 0
+settings[image_alignment_classes] = ''
+settings[image_alignment_teaser] = 1
+settings[image_caption_full] = 1
+settings[image_caption_teaser] = 1
+settings[one_image_teasers] = 1
+settings[load_onmediaqueryjs] = 1
+settings[login_block_remove_links] = 1
+settings[login_block_remove_openid] = 0
+settings[menu_item_span_elements] = 1
+settings[rel_author] = 1
+settings[show_window_size] = 0
+settings[skip_link_target] = '#main-content'
+settings[slider_login_block] = 0
+settings[toggle_comment_user_picture] = 1
+settings[toggle_logo] = 1
+settings[toggle_node_user_picture] = 0
+settings[unset_menu_titles] = 0

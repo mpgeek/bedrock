@@ -296,7 +296,7 @@ function bedrock_form_search_form_alter(&$form, $form_state) {
 function bedrock_form_user_login_block_alter(&$form, &$form_state, $form_id) {
   global $theme_key;
   $theme_name = $theme_key;
-  if (bedrock_get_setting('enable_markup_overides', $theme_name)) {
+  if (bedrock_get_setting('enable_markup_overrides', $theme_name)) {
     if (bedrock_get_setting('login_block_remove_links', $theme_name)) {
       // Remove the links
       if (isset($form['links'])) {
@@ -820,7 +820,7 @@ function bedrock_preprocess_block(&$vars) {
   }
 
   // Add classes to theme the horizontal block option
-  if (bedrock_get_setting('enable_markup_overides', $theme_name)) {
+  if (bedrock_get_setting('enable_markup_overrides', $theme_name)) {
     if (bedrock_get_setting('horizontal_login_block', $theme_name) && $vars['block']->module === 'user' && $vars['block']->delta === 'login') {
       $vars['classes_array'][] = 'lb-h';
       $vars['title_attributes_array']['class'][] = 'element-invisible';
@@ -950,7 +950,7 @@ function bedrock_preprocess_field(&$vars) {
     if (bedrock_get_setting('enable_image_settings', $theme_name)) {
 
       // Reduce number of images in teaser view mode to single image
-      if (bedrock_get_setting('image_teaser', $theme_name)) {
+      if (bedrock_get_setting('one_image_teasers', $theme_name)) {
         if ($element['#view_mode'] == 'teaser') {
           $item = reset($vars['items']);
           $vars['items'] = array($item);
@@ -1011,8 +1011,8 @@ function bedrock_preprocess_node(&$vars) {
         if ($image_caption_full = bedrock_get_setting('image_caption_full', $theme_name)) {
           $vars['classes_array'][] = $image_caption_full;
         }
-        if ($image_alignment = bedrock_get_setting('image_alignment', $theme_name)) {
-          $vars['classes_array'][] = $image_alignment;
+        if ($image_alignment_classes = bedrock_get_setting('image_alignment_classes', $theme_name)) {
+          $vars['classes_array'][] = $image_alignment_classes;
         }
       }
       if ($vars['view_mode'] == 'teaser') {
@@ -1128,7 +1128,7 @@ function bedrock_preprocess_comment(&$vars) {
 
   // Title hidden?
   if (bedrock_get_setting('enable_extensions', $theme_name)) {
-    if (bedrock_get_setting('enable_markup_overides', $theme_name)) {
+    if (bedrock_get_setting('enable_markup_overrides', $theme_name)) {
       if (bedrock_get_setting('comments_hide_title', $theme_name)) {
         $vars['title_attributes_array']['class'][] = 'element-invisible';
       }
@@ -1212,7 +1212,7 @@ function bedrock_preprocess_username(&$vars) {
   $theme_name = $theme_key;
   // Add rel=author for SEO and supporting search engines
   if (bedrock_get_setting('enable_extensions', $theme_name)) {
-    if (bedrock_get_setting('enable_markup_overides', $theme_name)) {
+    if (bedrock_get_setting('enable_markup_overrides', $theme_name)) {
       if (bedrock_get_setting('rel_author', $theme_name)) {
         if (isset($vars['link_path'])) {
           $vars['link_attributes']['rel'][] = 'author';
