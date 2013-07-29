@@ -370,10 +370,8 @@ function bedrock_wysiwyg_editor_settings_alter(&$settings, &$context) {
 function bedrock_generate_html_classes(&$vars, $theme_name) {
   $classes_array = &drupal_static(__FUNCTION__, array());
   if (empty($classes_array)) {
-
-    // Extra Classes
+    // Extra classes?
     if (bedrock_get_setting('extra_page_classes', $theme_name)) {
-
       // Set a class based on the language
       if (function_exists('locale')) {
         $classes_array[] = 'lang-' . $vars['language']->language;
@@ -386,7 +384,7 @@ function bedrock_generate_html_classes(&$vars, $theme_name) {
         $classes_array[] = 'site-name-' . drupal_html_class($head_title);
       }
 
-      // Classes for theming based on context
+      // Classes for theming based on context.
       if (!$vars['is_front']) {
         // Add unique class for each page.
         $path = drupal_get_path_alias($_GET['q']);
