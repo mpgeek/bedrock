@@ -406,20 +406,14 @@ function bedrock_generate_html_classes(&$vars, $theme_name) {
       }
     }
 
-    // Set classes for views and panels pages
+    // Set class indicating whether this is a Views page.
     $vars['menu_item'] = menu_get_item();
-    switch ($vars['menu_item']['page_callback']) {
-      case 'views_page':
-        // Is this a Views page?
-        $classes_array[] = 'page-views';
-        break;
-      case 'page_manager_page_execute':
-      case 'page_manager_node_view':
-      case 'page_manager_contact_site':
-        // Is this a Panels page?
-        $classes_array[] = 'page-panels';
-        break;
-    }
+    $is_views = $vars['menu_item']['page_callback'] === 'views_page';
+    $classes_array[] = 'page-' . ($is_views ? '' : 'not-') . 'views';
+
+    // Set class indicating whether this is a Panels page.
+    $is_panels = is_object(panels_get_current_page_display());
+    $classes_array[] = 'page-' . ($is_panels ? '' : 'not-') . 'panels';
   }
 
   return $classes_array;
