@@ -412,6 +412,11 @@ function bedrock_generate_html_classes(&$vars, $theme_name) {
     // Set class indicating whether this is a Panels page.
     $is_panels = is_object(panels_get_current_page_display());
     $classes_array[] = 'page-' . ($is_panels ? '' : 'not-') . 'panels';
+
+    // Set class indicating whether tabs are displayed.
+    $tasks = menu_local_tasks();
+    $with_tabs = $tasks['tabs']['count'] > 1;
+    $classes_array[] = 'with' . ($with_tabs ? '' : 'out') . '-tabs';
   }
 
   return $classes_array;
