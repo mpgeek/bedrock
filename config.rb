@@ -42,24 +42,18 @@ environment = :development
 # You probably don't need to edit anything below this.
 
 
-# You can select your preferred output style here (can be overridden via the
-# command line)
-#output_style = :expanded or :nested or :compact or :compressed
-output_style = (environment == :development) ? :expanded : :compact
-
+# You can select your preferred output style here (can be overridden via the command line):
+# output_style = :expanded or :nested or :compact or :compressed
+output_style = (environment == :development) ? :expanded : :compressed
 
 # To enable relative paths to assets via compass helper functions. Since Drupal
 # themes can be installed in multiple locations, we don't need to worry about
-# the absolute path to the theme from server root.
+# the absolute path to the theme from the server root.
 relative_assets = true
 
-# To disable debugging comments that display the original location of your
-# selectors. Uncomment:
+# To disable debugging comments that display the original location of your selectors. Uncomment:
 # line_comments = false
 
-# Pass options to sass.
-# - For development, we turn on the FireSass-compatible debug_info.
-# - For production, we force the CSS to be regenerated even though the source
-#   scss may not have changed, since we want the CSS to be compressed and have
-#   the debug info removed.
-sass_options = (environment == :development) ? {:debug_info => true} : {:always_update => true}
+# Pass options to sass. For development, we turn on the FireSass-compatible
+# debug_info if the firesass config variable above is true.
+sass_options = (environment == :development && firesass == true) ? {:debug_info => true} : {}
