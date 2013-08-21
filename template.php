@@ -959,6 +959,11 @@ function bedrock_preprocess_node(&$vars) {
   // article class to attempt backwards compatibility
   $vars['classes_array'][] = 'article';
 
+  // Allow view-mode specific node templates.
+  if (!empty($vars['view_mode'])) {
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['view_mode'];
+  }
+
   // Extra classes if required
   if (bedrock_get_setting('extra_article_classes', $theme_name)) {
 
