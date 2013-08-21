@@ -29,7 +29,7 @@ settings[apple_touch_icon_path_m] = ''
 settings[bedrock_meta_apple_mobile_web_app_capable] = 1
 settings[bedrock_meta_handheldfriendly] = 1
 settings[bedrock_meta_mobileoptimized] = 1
-settings[bedrock_meta_viewport] = 1
+settings[bedrock_meta_viewport] = 'width=device-width,minimum-scale=1,maximum-scale=1'
 settings[breadcrumb_display] = 1
 settings[breadcrumb_home] = 1
 settings[breadcrumb_label] = 1
