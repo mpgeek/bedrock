@@ -88,8 +88,8 @@
 ?>
 <div id="page" class="container <?php print $classes; ?>">
 
-  <!-- region: Leaderboard -->
-  <?php print render($page['leaderboard']); ?>
+  <!-- Region: Page top -->
+  <?php print render($page['page_top']); ?>
 
   <header<?php print $header_attributes; ?>>
 
@@ -121,25 +121,34 @@
       </div><!-- /end #branding -->
     <?php endif; ?>
 
-    <!-- region: Header -->
+    <!-- Region: Header -->
     <?php print render($page['header']); ?>
 
   </header>
 
-  <!-- Navigation elements -->
-  <?php print render($page['menu_bar']); ?>
-  <?php if ($primary_navigation): print $primary_navigation; endif; ?>
-  <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
+  <!-- Region: Navigation -->
+  <?php if ($page['navigation'] || $primary_navigation || $secondary_navigation): ?>
+    <div class="container clearfix">
+      <?php print render($page['navigation']); ?>
+      <?php if ($primary_navigation): print $primary_navigation; endif; ?>
+      <?php if ($secondary_navigation): print $secondary_navigation; endif; ?>
+    </div>
+  <?php endif; ?>
 
   <!-- Breadcrumbs -->
-  <?php if ($breadcrumb): print $breadcrumb; endif; ?>
+  <?php if ($breadcrumb): ?>
+    <div class="container clearfix">
+      <?php print $breadcrumb; ?>
+    </div>
+  <?php endif; ?>
 
-  <!-- Messages and Help -->
-  <?php print $messages; ?>
-  <?php print render($page['help']); ?>
-
-  <!-- region: Secondary Content -->
-  <?php print render($page['secondary_content']); ?>
+  <!-- Region: Help  -->
+  <?php if ($page['help'] || $messages): ?>
+    <div class="container clearfix">
+      <?php print $messages; ?>
+      <?php print render($page['help']); ?>
+    </div>
+  <?php endif; ?>
 
   <div id="columns" class="columns clearfix">
     <div id="content-column" class="content-column" role="main">
@@ -182,7 +191,7 @@
             </header>
           <?php endif; ?>
 
-          <!-- region: Main Content -->
+          <!-- Region: Content -->
           <?php if ($content = render($page['content'])): ?>
             <div id="content" class="region">
               <?php print $content; ?>
@@ -192,26 +201,35 @@
           <!-- Feed icons (RSS, Atom icons etc -->
           <?php print $feed_icons; ?>
 
-          <?php print render($title_suffix); // Prints page level contextual links ?>
+          <?php print render($title_suffix); // Prints page-level contextual links ?>
 
         </<?php print $tag; ?>><!-- /end #main-content -->
 
-        <!-- region: Content Aside -->
-        <?php print render($page['content_aside']); ?>
+
 
       </div><!-- /end .content-inner -->
     </div><!-- /end #content-column -->
 
+    <!-- Region: Coda -->
+    <?php if ($page['coda']): ?>
+      <div class="container clearfix">
+        <?php print render($page['coda']); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($page['footer']): ?>
+      <div class="container clearfix">
+        <footer<?php print $footer_attributes; ?>>
+          <?php print render($page['footer']); ?>
+        </footer>
+      </div>
+    <?php endif; ?>
+
   </div><!-- /end #columns -->
 
-  <!-- region: Tertiary Content -->
-  <?php print render($page['tertiary_content']); ?>
-
-  <!-- region: Footer -->
-  <?php if ($page['footer']): ?>
-    <footer<?php print $footer_attributes; ?>>
-      <?php print render($page['footer']); ?>
-    </footer>
+  <!-- Region: Page bottom -->
+  <?php if ($page['page_bottom']): ?>
+    <?php print render($page['page_bottom']); ?>
   <?php endif; ?>
 
 </div>
