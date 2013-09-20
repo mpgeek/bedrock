@@ -410,7 +410,10 @@ function bedrock_generate_html_classes(&$vars, $theme_name) {
     $classes_array[] = 'page-' . ($is_views ? '' : 'not-') . 'views';
 
     // Set class indicating whether this is a Panels page.
-    $is_panels = is_object(panels_get_current_page_display());
+    $is_panels = FALSE;
+    if (module_exists('panels')) {
+      $is_panels = is_object(panels_get_current_page_display());
+    }
     $classes_array[] = 'page-' . ($is_panels ? '' : 'not-') . 'panels';
 
     // Set class indicating whether tabs are displayed.
