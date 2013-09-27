@@ -85,6 +85,12 @@
  * @see bedrock_preprocess_page()
  * @see bedrock_process_page()
  */
+
+/**
+ * @todo
+ * Fix up documentaton above above to match new variables and implemenation
+ * notes, details.
+ */
 ?>
 <div id="page" class="container <?php print $classes; ?>">
 

@@ -1,10 +1,7 @@
-// Foundatoin global default settings.
-@import "util/foundation_settings";
+// Import settings.
+@import "util/settings_bedrock";
 
-// Bedrock overrides of foundation defaults.
-@import "util/bedrock_settings";
-
-// Comment out this import if you don't want to use normalize
+// Comment out this import if you don't want to use normalize.
 @import "partials/normalize";
 
 // Comment out this import if you are customizing you imports below
