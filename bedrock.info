@@ -1,7 +1,8 @@
-name =  bedrock
-description = A responsive, panels-aware, theme based on the Aurora base theme.
+name =  Bedrock
+description = A responsive, panels-aware, HTML5 theme based on Aurora.
 core = 7.x
 base theme = aurora
+version = "7.x-1.x"
 
 ; ========================================
 ; Regions
@@ -51,7 +52,7 @@ settings[favicon_path] = ''
 settings[favicon_upload] = ''
 settings[hide_recomended_modules] = '0'
 settings[aurora_enable_chrome_frame] = '1'
-settings[aurora_min_ie_support] = '10'
+settings[aurora_min_ie_support] = '8'
 settings[aurora_html_tags] = '1'
 settings[aurora_typekit_id] = '0'
 settings[aurora_livereload] = '0'
