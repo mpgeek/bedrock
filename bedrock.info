@@ -1,5 +1,5 @@
 name =  bedrock
-description =  bedrock theme based on the Aurora base theme.
+description = A responsive, panels-aware, theme based on the Aurora base theme.
 core = 7.x
 base theme = aurora
 
